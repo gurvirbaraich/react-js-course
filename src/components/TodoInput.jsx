@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-export default function TodoInput() {
+export default function TodoInput({ todos, setTodos }) {
+  // Random task
+  const [randomTask, setRandomTask] = useState("");
+
   // Initializes @todo with empty string
   const [todoTitle, setTodoTitle] = useState("");
-
-  // Initializes @todos with empty array
-  const [todos, setTodos] = useState([]);
 
   // Called when value inside the input changes.
   const handleChange = (event) => {
@@ -20,25 +20,43 @@ export default function TodoInput() {
 
     // Created todo object
     const todo = {
+      id: todos.length,
       title: todoTitle,
       completed: false,
     };
 
     // Appending new todo item in the list.
-    setTodos([...todos, todo]);
+    setTodos([...todos, todo])
 
     // Empty the value of input.
     setTodoTitle("");
   };
 
+  // Function to return random task
+  function getRandomTask() {
+    const tasks = [
+      "Do the dishes",
+      "Go to the gym",
+      "Take a walk",
+      "Play a game",
+      "Sing a song",
+    ];
+
+    return tasks[Math.floor(Math.random() * tasks.length)];
+  }
+  
   useEffect(() => {
-    console.log(todos);
-  }, [todos]);
+    setRandomTask(getRandomTask());
+
+    setInterval(() => {
+      setRandomTask(getRandomTask());
+    }, 2000)
+  }, [])
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input value={todoTitle} onChange={handleChange} />
-      <button>Add todo</button>
+    <form className="flex items-center gap-2" onSubmit={handleSubmit}>
+      <input className="w-full p-3 border rounded font-poppins" value={todoTitle} onChange={handleChange} placeholder={randomTask} />
+      <button className="p-3 rounded bg-indigo-300 font-poppins w-40">Add todo</button>
     </form>
   );
 }
