@@ -5,6 +5,7 @@ import Todo from "./components/Todo";
 export default function App() {
   // Initializes @todos with empty array
   const [todos, setTodos] = useState([]);
+  const [updatingTodo, setUpdatingTodo] = useState(null);
 
   const completeTodo = (todo) => {
     // Reversing the value of completed property inside @todo
@@ -32,14 +33,19 @@ export default function App() {
     setTodos(updated_todos);
   }
 
+  const updateTodo = (todo) => {
+    setUpdatingTodo(todo);
+  }
+
   useEffect(() => {
     console.log(todos);
+    setUpdatingTodo(null);
   }, [todos]);
 
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-slate-900">
       <div className="max-w-md min-h-[28rem] bg-white min-w-[24rem] rounded-lg overflow-hidden p-3">
-        <TodoInput setTodos={setTodos} todos={todos} />
+        <TodoInput setTodos={setTodos} todos={todos} updatingTodo={updatingTodo} />
 
         <div className="mt-3">
           <ul className="flex flex-col gap-2 max-h-80 overflow-y-scroll todo-container">
@@ -48,6 +54,7 @@ export default function App() {
                 key={idx}
                 deleteTodo={deleteTodo}
                 completeTodo={completeTodo}
+                updateTodo={updateTodo}
                 todo={todo}
               />
             ))}
