@@ -3,3 +3,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.todo-container {
+  scrollbar-width: 0px;
+}
+
+.todo-container::-webkit-scrollbar {
+  width: 0px;
+}

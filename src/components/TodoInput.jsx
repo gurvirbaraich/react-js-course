@@ -13,6 +13,18 @@ export default function TodoInput({ todos, setTodos }) {
     setTodoTitle(event.target.value);
   };
 
+  function generateRandomID(length = 8) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
+
   // Called when the form is submitted.
   const handleSubmit = (event) => {
     // prevent the default behavior of the form element.
@@ -20,7 +32,7 @@ export default function TodoInput({ todos, setTodos }) {
 
     // Created todo object
     const todo = {
-      id: todos.length,
+      id: generateRandomID(),
       title: todoTitle,
       completed: false,
     };

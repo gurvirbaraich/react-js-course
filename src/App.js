@@ -24,8 +24,10 @@ export default function App() {
     // Make clone of the @todos array
     const updated_todos = [...todos];
 
+    const todo_index = updated_todos.indexOf(todo);
+
     // Removing the todo from the array
-    delete updated_todos[todo.id];
+    updated_todos.splice(todo_index, 1);
 
     setTodos(updated_todos);
   }
@@ -40,7 +42,7 @@ export default function App() {
         <TodoInput setTodos={setTodos} todos={todos} />
 
         <div className="mt-3">
-          <ul className="flex flex-col gap-5">
+          <ul className="flex flex-col gap-2 max-h-80 overflow-y-scroll todo-container">
             {todos.map((todo, idx) => (
               <Todo
                 key={idx}

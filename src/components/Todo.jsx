@@ -1,10 +1,10 @@
 export default function Todo({ todo, completeTodo, deleteTodo }) {
   return (
-    <li className="flex justify-between items-center">
+    <li className="flex justify-between items-center font-poppins p-2 rounded bg-gray-50">
       <p style={{ textDecoration: todo.completed ? "line-through" : "none" }} className="capitalize">
         {todo.title}
       </p>
-      <div className="flex gap-1 mt-1">
+      <div className="flex gap-1">
         <button onClick={() => completeTodo(todo)} title={todo.completed ? "Incomplete Todo" : "Complete Todo"}>
           {todo.completed ? <Incomplete /> : <Complete />}
         </button>
